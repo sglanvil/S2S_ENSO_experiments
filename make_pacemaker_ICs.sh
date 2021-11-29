@@ -2,10 +2,6 @@
 
 module load nco
 
-# ------------- edit this if you need to restart the script (see latest 'rest' file created)
-restartCommenced='no'
-dateToRestartOn='0251-09-20-00000'
-
 # -------------- INFO ABOUT PACEMAKER MASK (note, renaming of dimensions)
 # maskFil=/glade/u/home/islas/CVCWG/CESM2_PACEMAKER/SSTINPUT_wedge/ModifiedSST_ERSST_gx1v7.nc
 # 0 over ocean, -1 over land, and 1 over pacemaker region
@@ -23,14 +19,11 @@ for climoDir in $climoDirBase/*-00000; do
 	date=$(sed -e 's/.*\///' <<< $climoDir)
 	realDir=/glade/campaign/cesm/development/cross-wg/S2S/CESM2/OCEANIC/$date/
 
-	# -------------- if the job gets interrupted, this allows you to restart (set dateToRestartOn) while still looping through all the files like normal
-        if [[ "$date" != "$dateToRestartOn" ]]; then
-                if [[ "$restartCommenced" == 'no' ]]; then
-                        continue
-                fi
+	# -------------- if the job gets interrupted, this will restart with on the last date 
+        size=$(du -shb "$restDir/$date" | cut -f1)
+        if [ $size -gt 844000000 ]; then
+                continue
         fi
-        restartCommenced='yes'
-        echo 'running this date'
 
 	# -------------- note, hopefully there is only ONE pop.r. file in these directories (need to check)
 	realFil=`cd $realDir; ls *.pop.r.*`
