@@ -6,7 +6,3 @@ pacemaker mask: /glade/u/home/islas/CVCWG/CESM2_PACEMAKER/SSTINPUT_wedge/Modifie
 real ocean ICs: /glade/campaign/cesm/development/cross-wg/S2S/CESM2/OCEANIC/
 
 climo ocean ICs: /glade/campaign/cesm/development/cross-wg/S2S/CESM2/CLIMOCEANIC/
-
-Notes:
-
-apply the pacemaker mask from z_t=0 to z_t=45 (~176 meters)
