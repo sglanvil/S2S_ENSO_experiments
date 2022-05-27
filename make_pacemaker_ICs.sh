@@ -19,7 +19,7 @@ for climoDir in $climoDirBase/*-00000; do
 	date=$(sed -e 's/.*\///' <<< $climoDir)
 	realDir=/glade/campaign/cesm/development/cross-wg/S2S/CESM2/OCEANIC/$date/
 
-	# -------------- if the job gets interrupted, this will restart with on the last date 
+	# -------------- if the job gets interrupted, this will restart with the last date 
         size=$(du -shb "$restDir/$date" | cut -f1)
         if [ $size -gt 844000000 ]; then
                 continue
